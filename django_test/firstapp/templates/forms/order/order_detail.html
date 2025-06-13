@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+{% block title %}Order #{{ object.id }}{% endblock %}
+{% block content %}
+    <h1>Order #{{ object.id }}</h1>
+    <p><strong>Customer:</strong> {{ object.customer }}</p>
+    <p><strong>Status:</strong> {{ object.get_status_display }}</p>
+    <p><strong>Total Price:</strong> {{ object.total_price }}</p>
+    <p><strong>Date:</strong> {{ object.created_at|date:"Y-m-d H:i" }}</p>
+    <h3>Items</h3>
+    <ul>
+        {% for item in object.items.all %}
+            <li>{{ item.product.name }} (x{{ item.quantity }}) - {{ item.price }}</li>
+        {% empty %}
+            <li>No items in this order.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'shop:order_update' object.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'shop:order_delete' object.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'shop:order_list' %}" class="btn btn-secondary">Back to Orders</a>
+{% endblock %}

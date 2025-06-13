@@ -1,0 +1,39 @@
+{% extends 'shop/base.html' %}
+{% block title %}{% if form.instance.pk %}Edit Product{% else %}Add Product{% endif %}{% endblock %}
+{% block content %}
+    <h1>{% if form.instance.pk %}Edit Product{% else %}Add Product{% endif %}</h1>
+    <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+            {{ form.name|add_class:"form-control" }}
+            <div class="invalid-feedback">{{ form.name.errors }}</div>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+            {{ form.description|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.price.id_for_label }}" class="form-label">Price</label>
+            {{ form.price|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.photo.id_for_label }}" class="form-label">Photo</label>
+            {{ form.photo|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.is_exists.id_for_label }}" class="form-label">In Stock</label>
+            {{ form.is_exists|add_class:"form-check-input" }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.category.id_for_label }}" class="form-label">Category</label>
+            {{ form.category|add_class:"form-select" }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.manufacturer.id_for_label }}" class="form-label">Manufacturer</label>
+            {{ form.manufacturer|add_class:"form-select" }}
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'shop:product_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
