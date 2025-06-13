@@ -27,19 +27,71 @@
         </div>
     </nav>
     <div class="container-md">
-        <div class="card mb-3">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="https://i.pinimg.com/736x/9a/94/3d/9a943d8cf49594e478d3a34411c887a7.jpg" class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Игровой ноутбук</h5>
-                        <p class="card-text">Мега машина для запуска 3 героев</p>
-                    </div>
-                </div>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                {% if product.photo %}
+                    <img src="{{ product.photo.url }}" class="img-fluid rounded" alt="{{ product.name|escape }}" style="max-height: 400px; object-fit: contain;">
+                {% else %}
+                    <img src="https://via.placeholder.com/400" class="img-fluid rounded" alt="Нет фото">
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <h1 class="mb-3">{{ product.name }}</h1>
+                <p class="lead">{{ product.description|default:"Нет описания" }}</p>
+                <h3>{{ product.price }} ₽</h3>
+                <p><strong>Категория:</strong> {{ product.category.name }}</p>
+                <p><strong>Производитель:</strong> {{ product.manufacturer.name|default:"Не указан" }}</p>
+                <p><strong>Наличие:</strong> {% if product.is_exists %}В наличии{% else %}Нет в наличии{% endif %}</p>
+                <a href="{% url 'cart' %}" class="btn btn-primary">Добавить в корзину</a>
             </div>
         </div>
+        <hr>
+        <h2 class="mb-4">Отзывы</h2>
+        {% for review in product.reviews.all %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.customer.first_name }} {{ review.customer.last_name }} <span class="badge bg-warning text-dark">{{ review.rating }} ★</span></h5>
+                    <p class="card-text">{{ review.comment|default:"Без комментария" }}</p>
+                    <p class="card-text"><small class="text-muted">{{ review.created_at|date:"d.m.Y H:i" }}</small></p>
+                </div>
+            </div>
+        {% empty %}
+            <p>Отзывов пока нет 😔</p>
+        {% endfor %}
+        {% if user.is_authenticated %}
+            <h3 class="mb-3">Оставить отзыв</h3>
+            <form method="POST" class="mb-4">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Рейтинг</label>
+                    <select class="form-select" name="rating" id="rating" required>
+                        {% for i in "12345" %}
+                            <option value="{{ i }}">{{ i }} ★</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="comment" class="form-label">Комментарий</label>
+                    <textarea class="form-control" name="comment" id="comment" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+            </form>
+        {% else %}
+            <p><a href="{% url 'login' %}">Войдите</a>, чтобы оставить отзыв.</p>
+        {% endif %}
     </div>
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', function() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-bs-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-bs-theme', savedTheme);
+        }
+    </script>
 </body>
 </html>
