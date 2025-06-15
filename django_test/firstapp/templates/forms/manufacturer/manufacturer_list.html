@@ -2,7 +2,7 @@
 {% block title %}Manufacturers{% endblock %}
 {% block content %}
     <h1 class="mb-4">Manufacturers</h1>
-    <a href="{% url 'shop:manufacturer_create' %}" class="btn btn-primary mb-3">Add Manufacturer</a>
+    <a href="{% url 'manufacturer_create' %}" class="btn btn-primary mb-3">Add Manufacturer</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -15,12 +15,12 @@
         <tbody>
             {% for manufacturer in manufacturers %}
                 <tr>
-                    <td><a href="{% url 'shop:manufacturer_detail' manufacturer.pk %}">{{ manufacturer.name }}</a></td>
+                    <td><a href="{% url 'manufacturer_detail' manufacturer.pk %}">{{ manufacturer.name }}</a></td>
                     <td>{{ manufacturer.country|default:"N/A" }}</td>
                     <td><a href="{{ manufacturer.website }}" target="_blank">{{ manufacturer.website|default:"N/A" }}</a></td>
                     <td>
-                        <a href="{% url 'shop:manufacturer_update' manufacturer.pk %}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="{% url 'shop:manufacturer_delete' manufacturer.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'manufacturer_update' manufacturer.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'manufacturer_delete' manufacturer.pk %}" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             {% empty %}

@@ -2,7 +2,7 @@
 {% block title %}Customers{% endblock %}
 {% block content %}
     <h1 class="mb-4">Customers</h1>
-    <a href="{% url 'shop:customer_create' %}" class="btn btn-primary mb-3">Add Customer</a>
+    <a href="{% url 'customer_create' %}" class="btn btn-primary mb-3">Add Customer</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -15,12 +15,12 @@
         <tbody>
             {% for customer in customers %}
                 <tr>
-                    <td><a href="{% url 'shop:customer_detail' customer.pk %}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
+                    <td><a href="{% url 'customer_detail' customer.pk %}">{{ customer.first_name }} {{ customer.last_name }}</a></td>
                     <td>{{ customer.email }}</td>
                     <td>{{ customer.phone|default:"N/A" }}</td>
                     <td>
-                        <a href="{% url 'shop:customer_update' customer.pk %}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="{% url 'shop:customer_delete' customer.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'customer_update' customer.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'customer_delete' customer.pk %}" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             {% empty %}

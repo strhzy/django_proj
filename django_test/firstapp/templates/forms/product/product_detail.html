@@ -8,7 +8,7 @@
     <p><strong>Category:</strong> {{ object.category.name }}</p>
     <p><strong>Manufacturer:</strong> {{ object.manufacturer.name|default:"N/A" }}</p>
     <p><strong>In Stock:</strong> {{ object.is_exists|yesno:"Yes,No" }}</p>
-    <a href="{% url 'shop:product_update' object.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'shop:product_delete' object.pk %}" class="btn btn-danger">Delete</a>
-    <a href="{% url 'shop:product_list' %}" class="btn btn-secondary">Back to Products</a>
+    <a href="{% url 'product_update' object.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'product_delete' object.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">Back to Products</a>
 {% endblock %}

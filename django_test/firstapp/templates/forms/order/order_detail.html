@@ -14,7 +14,7 @@
             <li>No items in this order.</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'shop:order_update' object.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'shop:order_delete' object.pk %}" class="btn btn-danger">Delete</a>
-    <a href="{% url 'shop:order_list' %}" class="btn btn-secondary">Back to Orders</a>
+    <a href="{% url 'order_update' object.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'order_delete' object.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">Back to Orders</a>
 {% endblock %}

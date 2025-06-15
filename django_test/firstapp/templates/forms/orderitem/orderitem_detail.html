@@ -5,7 +5,7 @@
     <p><strong>Product:</strong> {{ object.product.name }}</p>
     <p><strong>Quantity:</strong> {{ object.quantity }}</p>
     <p><strong>Price:</strong> {{ object.price }}</p>
-    <a href="{% url 'shop:orderitem_update' object.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'shop:orderitem_delete' object.pk %}" class="btn btn-danger">Delete</a>
-    <a href="{% url 'shop:orderitem_list' %}" class="btn btn-secondary">Back to Order Items</a>
+    <a href="{% url 'orderitem_update' object.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'orderitem_delete' object.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'orderitem_list' %}" class="btn btn-secondary">Back to Order Items</a>
 {% endblock %}

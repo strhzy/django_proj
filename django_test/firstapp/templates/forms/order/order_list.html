@@ -2,7 +2,7 @@
 {% block title %}Orders{% endblock %}
 {% block content %}
     <h1 class="mb-4">Orders</h1>
-    <a href="{% url 'shop:order_create' %}" class="btn btn-primary mb-3">Add Order</a>
+    <a href="{% url 'order_create' %}" class="btn btn-primary mb-3">Add Order</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -17,14 +17,14 @@
         <tbody>
             {% for order in orders %}
                 <tr>
-                    <td><a href="{% url 'shop:order_detail' order.pk %}">{{ order.id }}</a></td>
+                    <td><a href="{% url 'order_detail' order.pk %}">{{ order.id }}</a></td>
                     <td>{{ order.customer }}</td>
                     <td>{{ order.get_status_display }}</td>
                     <td>{{ order.total_price }}</td>
                     <td>{{ order.created_at|date:"Y-m-d" }}</td>
                     <td>
-                        <a href="{% url 'shop:order_update' order.pk %}" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="{% url 'shop:order_delete' order.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        <a href="{% url 'order_update' order.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'order_delete' order.pk %}" class="btn btn-sm btn-danger">Delete</a>
                     </td>
                 </tr>
             {% empty %}
