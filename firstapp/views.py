@@ -328,7 +328,7 @@ def about(request, product_id):
         comment = request.POST.get('comment')
 
         # Предотвращаем дублирующий отзыв
-        if Review.objects.filter(product=product, customer=request.user).exists():
+        if Review.objects.filter(product=product).exists():
             messages.warning(request, "Вы уже оставили отзыв.")
             return redirect('about', product_id=product_id)
 
