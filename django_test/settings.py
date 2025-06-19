@@ -27,7 +27,7 @@ DEBUG = False
 
 LOGIN_URL = '/login'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['strhzy.ru']
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
