@@ -64,6 +64,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'django_test.urls'
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://strhzy.ru',
+    'https://www.strhzy.ru',  # Include www if you use it
+    'http://localhost:8000',   # For local dev, if needed
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
